@@ -11,23 +11,23 @@ name: Build OpenWrt
 on:
   repository_dispatch:
   release:
-    types: published
+    types: [published]
   push:
     branches:
       - master
     paths:
       - '.config'
-#  schedule:
-#    - cron: 0 8 * * 5
-#  watch:
-#    types: started
+  watch:
+    types: [started]
+  # schedule:
+  #   - cron: 0 8 * * 5
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   CONFIG_FILE: .config
   DIY_SH: diy.sh
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -58,6 +58,12 @@ jobs:
 
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+
+    - name: Add ssr-plus
+      run: cd openwrt && sed -i 's/#src-git helloworld https:\/\/github.com\/fw876\/helloworld/src-git helloworld https:\/\/github.com\/fw876\/helloworld/g' feeds.conf.default
+
+    - name: Add openclash
+      run: cd openwrt && echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
