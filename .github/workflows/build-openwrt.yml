@@ -63,7 +63,7 @@ jobs:
       run: cd openwrt && sed -i 's/#src-git helloworld https:\/\/github.com\/fw876\/helloworld/src-git helloworld https:\/\/github.com\/fw876\/helloworld/g' feeds.conf.default
 
     - name: Add openclash
-      run: cd openwrt && echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
+      run: cd openwrt && echo 'src-git openclash https://github.com/vernesong/OpenClash;master' >> feeds.conf.default
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
