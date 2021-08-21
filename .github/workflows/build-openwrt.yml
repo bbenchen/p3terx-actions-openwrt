@@ -62,9 +62,6 @@ jobs:
 
     - name: Add openclash
       run: cd openwrt && echo 'src-git openclash https://github.com/vernesong/OpenClash;master' >> feeds.conf.default
-      
-    - name: Add dockerman
-      run: cd openwrt && echo 'src-git dockerman https://github.com/9l/luci-app-dockerman' >> feeds.conf.default
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
