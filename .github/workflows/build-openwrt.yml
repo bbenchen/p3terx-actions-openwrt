@@ -58,7 +58,7 @@ jobs:
       run: git clone $REPO_URL -b $REPO_BRANCH openwrt
 
     - name: Add ssr-plus
-      run: cd openwrt && echo 'src-git ssr-plus https://github.com/fw876/helloworld' feeds.conf.default
+      run: cd openwrt && echo 'src-git ssrplus https://github.com/fw876/helloworld' feeds.conf.default
 
     - name: Add openclash
       run: cd openwrt && echo 'src-git openclash https://github.com/vernesong/OpenClash;master' >> feeds.conf.default
